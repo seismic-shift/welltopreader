@@ -5,9 +5,6 @@ class Well:
     def __init__(self):
         return
 
-    def format_string(self, str_in):
-        return re.sub('\W+', '_', str_in).lower()
-
     @classmethod
     def from_txt(cls, pth, sep=':'):
 
@@ -20,8 +17,10 @@ class Well:
 
             if len(rtn) == 2:
                 
-                setattr(cls, rtn[0], rtn[1])
-                cls.attrs[rtn[0]] = rtn[1]
+                attr = re.sub('\W+', '', rtn[0].strip()).lower()
+
+                setattr(cls, attr, rtn[1])
+                cls.attrs[attr] = rtn[1]
 
         return cls
 
